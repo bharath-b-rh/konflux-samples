@@ -27,6 +27,11 @@ spec:
     value: Containerfile.cert-manager
   - name: path-context
     value: .
+  - name: build-args
+    value:
+      - "RELEASE_VERSION=v1.15.0"
+      - "COMMIT_SHA=$(cd cert-manager; git rev-parse HEAD)"
+      - "SOURCE_URL=$(cd cert-manager; git remote get-url origin)"
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while maintaining trust after pipeline customization.
