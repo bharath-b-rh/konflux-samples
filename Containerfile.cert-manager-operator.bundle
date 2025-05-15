@@ -1,4 +1,4 @@
-FROM registry.redhat.io/ubi9/toolbox:9.4 AS builder
+FROM registry.redhat.io/ubi9/toolbox:9.6 AS builder
 
 COPY cert-manager-operator/bundle/manifests /manifests
 COPY cert-manager-operator/bundle/metadata /metadata
