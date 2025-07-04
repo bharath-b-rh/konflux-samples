@@ -11,34 +11,27 @@
 	"rebaseLabel": "needs-rebase",
 	"rebaseWhen": "behind-base-branch",
 	"recreateWhen": "always",
-	"tekton": {
-		"enabled": true,
-		"packageRules": [
-			{
-				"matchUpdateTypes": [
-					"minor",
-					"patch",
-					"pin",
-					"digest"
-				],
-				"automerge": true
-			}
-		]
-	},
-	"dockerfile": {
-		"enabled": true,
-		"packageRules": [
-			{
-				"matchFileNames": ["Containerfile.*"],
-				"automerge": true
-			}
-		]
-	},
 	"git-submodules": {
-		"enabled": false
+		"enabled": true
 	},
-	"gomod": {
-		"enabled": false
-	}
+	"packageRules": [
+		{
+			"description": "Enable auto-merge for konflux-shared-configs submodule",
+			"matchDatasources": ["git-submodules"],
+			"matchDepNames": ["konflux-shared-configs"],
+			"automerge": true,
+			"automergeType": "pr",
+			"automergeStrategy": "merge-commit",
+			"labels": ["dependencies", "submodule", "auto-merge"],
+			"schedule": ["before 10am on monday"],
+			"commitMessagePrefix": "NO-JIRA: ",
+			"commitMessageTopic": "Update {{depName}} submodule to {{newVersion}}"
+		},
+		{
+			"description": "Disable updates for other submodules",
+			"matchDatasources": ["git-submodules"],
+			"matchDepNames": ["!konflux-shared-configs"],
+			"enabled": false
+		}
+	]
 }
-
