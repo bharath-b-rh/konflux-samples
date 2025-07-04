@@ -50,7 +50,7 @@ spec:
       - name: pathInRepo
         value: .tekton/multi-arch-build-pipeline.yaml
   taskRunTemplate:
-    serviceAccountName: build-pipeline-cert-manager-operator-1-16
+    serviceAccountName: build-pipeline-cert-manager-operator
   workspaces:
     - name: git-auth
       secret:
